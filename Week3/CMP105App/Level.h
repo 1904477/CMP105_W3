@@ -19,7 +19,9 @@ private:
 	// Default functions for rendering to the screen.
 	void beginDraw();
 	void endDraw();
-
+	sf::RectangleShape rect;
+	float rectspeed = 200.f;
+	
 	// Default variables for level class.
 	sf::RenderWindow* window;
 	Input* input;
