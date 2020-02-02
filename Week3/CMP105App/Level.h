@@ -21,6 +21,10 @@ private:
 	void endDraw();
 	sf::RectangleShape rect;
 	float rectspeed = 200.f;
+
+	sf::CircleShape circle;
+	float circlespeed = 300.f;
+	
 	
 	// Default variables for level class.
 	sf::RenderWindow* window;

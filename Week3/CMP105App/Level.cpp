@@ -9,8 +9,12 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	
 	rect.setSize(sf::Vector2f(100, 100));
 	rect.setPosition(20, 300);
-	
-
+	rect.setFillColor(sf::Color::Green);
+	circle.setRadius(50);
+	circle.setPosition(600, 200);
+	circle.setFillColor(sf::Color::Black);
+	circle.setOutlineThickness(5);
+	circle.setOutlineColor(sf::Color::Red);
 }
 
 Level::~Level()
@@ -55,11 +59,26 @@ void Level::update(float dt)
 		rect.setPosition(rect.getPosition().x, y);
 		//rectspeed = -rectspeed;
 	}
-	if (rect.getPosition().x + rect.getSize().x > window->getSize().x)
+	if (rect.getPosition().x<0)
 	{
+		float x1 = 0;
+		rect.setPosition(x1, rect.getPosition().y);
 
-		rectspeed = -rectspeed;
 	}
+	if (rect.getPosition().y<0)
+	{
+		float y1 = 0;
+		rect.setPosition(rect.getPosition().x, y1);
+	}
+	circle.move(circlespeed * dt, 0);
+	if (circle.getPosition().x + (2*circle.getRadius())> window->getSize().x)
+	{
+		circlespeed = -circlespeed;
+	
+		
+	}
+	
+
 }
 
 
@@ -70,7 +89,7 @@ void Level::render()
 {
 	beginDraw();
 	window->draw(rect);
-	
+	window->draw(circle);
 	endDraw();
 }
 
