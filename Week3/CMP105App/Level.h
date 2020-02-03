@@ -24,8 +24,17 @@ private:
 
 	sf::CircleShape circle;
 	float circlespeed = 300.f;
+
+	// vector for position
+	sf::Vector2f pos{ 100, 100 };
+
+	// vector for velocity
+	sf::Vector2f vel{ 1, 1 };
+
 	
 	
+
+
 	// Default variables for level class.
 	sf::RenderWindow* window;
 	Input* input;

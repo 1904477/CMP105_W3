@@ -15,6 +15,8 @@ Level::Level(sf::RenderWindow* hwnd, Input* in)
 	circle.setFillColor(sf::Color::Black);
 	circle.setOutlineThickness(5);
 	circle.setOutlineColor(sf::Color::Red);
+	
+
 }
 
 Level::~Level()
@@ -31,6 +33,7 @@ void Level::handleInput(float dt)
 // Update game objects
 void Level::update(float dt)
 {
+	//MAIN RECT INPUT AND MOVEMENTS,WITH COLLISION
 	if (input->isKeyDown(sf::Keyboard::D))
 	{
 		rect.move(rectspeed * dt, 0);
@@ -59,28 +62,33 @@ void Level::update(float dt)
 		rect.setPosition(rect.getPosition().x, y);
 		//rectspeed = -rectspeed;
 	}
-	if (rect.getPosition().x<0)
+	if (rect.getPosition().x < 0)
 	{
 		float x1 = 0;
 		rect.setPosition(x1, rect.getPosition().y);
 
 	}
-	if (rect.getPosition().y<0)
+	if (rect.getPosition().y < 0)
 	{
 		float y1 = 0;
 		rect.setPosition(rect.getPosition().x, y1);
 	}
-	circle.move(circlespeed * dt, 0);
-	if (circle.getPosition().x + (2*circle.getRadius())> window->getSize().x)
+
+	//circle movements and collision
+
+	pos.x += vel.x;
+	pos.y += vel.y;
+	if (pos.x+2*circle.getRadius() > 1200 || pos.x < 0)
 	{
-		circlespeed = -circlespeed;
-	
-		
+		vel.x = -vel.x;
 	}
-	
+	if (pos.y+2*circle.getRadius() > 675 || pos.y < 0)
+	{
+		vel.y = -vel.y;
+	}
+circle.setPosition(pos.x, pos.y);
 
 }
-
 
 
 
@@ -88,8 +96,10 @@ void Level::update(float dt)
 void Level::render()
 {
 	beginDraw();
+	
 	window->draw(rect);
 	window->draw(circle);
+	
 	endDraw();
 }
 
